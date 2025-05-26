@@ -11,5 +11,5 @@ jobs:
 
       - name: Run script
         run: |
-          echo "Running..."
-          echo $GITHUB_REF
+          chmod +x ./run.sh
+          ./run.sh
