@@ -1,15 +1,16 @@
-name: CI
+name: Command Injection Test
 
-on: [pull_request]
+on:
+  workflow_dispatch:
+    inputs:
+      user_input:
+        description: 'Input to be echoed'
+        required: true
+        default: 'safe'
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Run script
-        run: |
-          chmod +x ./run.sh
-          ./run.sh
+      - name: Echo user input (vulnerable)
+        run: echo "${{ github.event.inputs.user_input }}"
